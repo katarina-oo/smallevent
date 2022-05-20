@@ -5,11 +5,107 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>大事件-登录/注册</title>
+    <!-- layui 样式表 -->
+    <link rel="stylesheet" href="./assets/lib/layui/css/layui.css">
+    <!-- 本身 样式表 -->
+    <link rel="stylesheet" href="./assets/css/login.css">
 </head>
 
 <body>
+    <!-- 网页顶部 logo 区域 -->
+    <div class="layui-main">
+        <img src="./\./assets/images/logo.png" alt="">
+    </div>
 
+    <!-- 登录/注册 区域 -->
+    <div class="loginbox">
+        <!-- box标题(后台管理系统) -->
+        <div class="title-box"></div>
+
+        <!-- 登录 div -->
+        <div class="login-box">
+            <!-- 登录的表单 -->
+            <form class="layui-form" id="form_login">
+                <!-- 账户框 -->
+                <div class="layui-form-item">
+                    <i class="layui-icon layui-icon-username"></i>
+                    <input type="text" name="username" required lay-verify="required" placeholder="请输入账户" autocomplete="off" class="layui-input b-t">
+                </div>
+                <!-- 账户框 -->
+
+                <!-- 密码框 -->
+                <div class="layui-form-item">
+                    <i class="layui-icon layui-icon-password"></i>
+                    <input type="password" name="password" required lay-verify="required|pwd" placeholder="请输入密码" autocomplete="off" class="layui-input b-t">
+                </div>
+                <!-- 密码框 -->
+
+                <!-- 登录按钮 -->
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn-fluid b-t" lay-submit>登录</button>
+                </div>
+                <!-- 登录按钮 -->
+
+                <!-- 去登录 div -->
+                <div class="layui-form-item login-box links">
+                    <a href="javascript:;" id="link_reg">去注册</a>
+                </div>
+
+            </form>
+            <!-- 登录的表单 -->
+        </div>
+        <!-- 登录 div -->
+
+        <!-- 注册 div -->
+        <div class="reg-box">
+            <!-- 注册的表单 -->
+            <form class="layui-form" id="form_reg">
+                <!-- 账户框 -->
+                <div class="layui-form-item">
+                    <i class="layui-icon layui-icon-username"></i>
+                    <input type="text" name="username" required lay-verify="required" placeholder="请输入账户" autocomplete="off" class="layui-input b-t">
+                </div>
+                <!-- 账户框 -->
+
+                <!-- 密码框 -->
+                <div class="layui-form-item">
+                    <i class="layui-icon layui-icon-password"></i>
+                    <input type="password" name="password" required lay-verify="required|pwd" placeholder="请输入密码" autocomplete="off" class="layui-input b-t" id="p-wd">
+                </div>
+                <!-- 密码框 -->
+
+                <!-- 再次确认密码框 -->
+                <div class="layui-form-item">
+                    <i class="layui-icon layui-icon-password"></i>
+                    <input type="password" name="repassword" required lay-verify="required|pwd|repwd" placeholder="再次确认密码" autocomplete="off" class="layui-input b-t">
+                </div>
+                <!-- 再次确认密码框 -->
+
+                <!-- 注册按钮 -->
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn-fluid b-t" lay-submit>注册</button>
+                </div>
+                <!-- 注册按钮 -->
+
+                <!-- 去登录 div -->
+                <div class="layui-form-item reg-box links">
+                    <a href="javascript:;" id="link_login">去登录</a>
+                </div>
+            </form>
+            <!-- 注册的表单 -->
+        </div>
+
+    </div>
+
+    <!-- 导入 jQuery -->
+    <script src="./assets/lib/jquery.js"></script>
+    <!-- 导入 jayui js -->
+    <script src="./assets/lib/layui/layui.all.js"></script>
+    <!-- 导入 baseAPI -->
+    <script src="./assets/js/baseAPI.js"></script>
+    <!-- 导入 自身 js -->
+    <script src="./assets/js/login.js"></script>
 </body>
 
 </html>
