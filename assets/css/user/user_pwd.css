@@ -1,0 +1,21 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 15px;
+    /* background-color: skyblue; */
+    background: url(../../images/zz.jpg);
+    background-size: cover;
+}
+
+.layui-card {
+    opacity: 0.7;
+    background-color: #598090;
+}
+
+.layui-form {
+    width: 500px;
+}
