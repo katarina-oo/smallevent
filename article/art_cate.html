@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/lib/layui/css/layui.css">
+    <link rel="stylesheet" href="../assets/css/article/art_cate.css">
+</head>
+
+<body>
+    <!-- 卡片区域 -->
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <span>文章类别管理</span>
+            <button type="button" class="layui-btn layui-btn-normal layui-btn-sm" id="btnAddCate">添加类别</button>
+        </div>
+        <div class="layui-card-body">
+
+            <table class="layui-table">
+                <colgroup>
+                    <col>
+                    <col>
+                    <col width="200">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>分类名称</th>
+                        <th>分类别名</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr>
+                        <td>贤心</td>
+                        <td>2016-11-29</td>
+                        <td>人生就像是一场修行</td>
+                    </tr>
+                    <tr>
+                        <td>许闲心</td>
+                        <td>2016-11-28</td>
+                        <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+                    </tr> -->
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- 表格数据的模板 -->
+    <!-- 循环 所获取文章中的数据(数据都放在data中) -->
+    <script type="text/html" id="tpl-table">
+        {{each data}}
+        <tr>
+            <td>{{$value.id}}</td>
+            <td>{{$value.cate_name}}</td>
+            <td>{{$value.cate_alias}}</td>
+            <td>
+                <!-- 给编辑按钮添加一个自定义属性data-id，只要触发了点击事件，就可以获取这个自定义属性 -->
+                <button type="button" class="layui-btn layui-btn-normal layui-btn-xs btn-edit" data-id="{{$value.id}}">编辑</button>
+                <button type="button" class="layui-btn layui-btn-danger layui-btn-xs btn-delete" data-id="{{$value.id}}">删除</button>
+            </td>
+        </tr>
+        {{/each}}
+    </script>
+    <!-- 表格数据的模板 -->
+
+    <!-- 添加分类的弹出层 -->
+    <!-- 用content属性 来指定 html标签的内容 -->
+    <script type="text/html" id="dialog-add">
+
+        <form class="layui-form" id="form-add">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="cate_name" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类别名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="cate_alias" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">确认添加</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+
+    </script>
+    <!-- 添加分类的弹出层 -->
+
+    <!-- 修改分类的弹出层 -->
+    <script type="text/html" id="dialog-edit">
+        <!-- 快速为表单填充数据 添加lay-filter属性 -->
+        <form class="layui-form" id="form-edit" lay-filter="form-edit">
+
+            <!-- 隐藏域，保存 id 的值 -->
+            <input type="hidden" name="id">
+            <!-- 隐藏域，保存 id 的值 -->
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="cate_name" required lay-verify="required" placeholder="请输入分类名称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类别名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="cate_alias" required lay-verify="required" placeholder="请输入分类别名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">确认修改</button>
+                </div>
+            </div>
+
+        </form>
+    </script>
+    <!-- 修改分类的弹出层 -->
+
+
+
+    <!-- 导入 layui js -->
+    <script src="../assets/lib/layui/layui.all.js"></script>
+    <!-- 导入 jQuery -->
+    <script src="../assets/lib/jquery.js"></script>
+    <!-- 导入 baseAPI js -->
+    <script src="../assets/js/baseAPI.js"></script>
+    <!-- 导入模板模板引擎 -->
+    <script src="../assets/lib/template-web.js"></script>
+    <!-- 导入 自己 js -->
+    <script src="../assets/js/article/art_cate.js"></script>
+</body>
+
+</html>
