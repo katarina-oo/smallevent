@@ -1,9 +1,16 @@
 $(function() {
     let layer = layui.layer
     let form = layui.form
-    let data = JSON.parse(localStorage.getItem('content'))
-    console.log(data);
-    let flag = JSON.parse(localStorage.getItem('flag'))
+
+    // -----------------------------------------------------------------------------------------------
+    // 需求：发布文章的页面，需要兼容添加和修改的功能
+    // 1、需要区分从哪个地方进入到发布文章的页面的（添加状态，修改状态）
+    // 先从缓存里面取 id，如果能取到的话，说明当前是修改状态（修改完之后记得清缓存）
+    // 先从缓存里面取 id，如果没有取到的话，说明当前是添加状态
+
+    // 2、发布文章这个页面，除了需要你请求文章详情ajax之外，还需要请求文章类别ajax
+    // 我们要保证先把所有的类别请求完之后，再去请求文章详情( form.val('form-name', res.data) )
+    // -----------------------------------------------------------------------------------------------
 
     // 1.2 调用加载文章分类的方法
     initCate()
@@ -30,28 +37,60 @@ $(function() {
 
                 // 1.4一定要记得调用 form.render() 方法
                 form.render()
+
+
+                // ------------------------
+                // 回显分类的时候，得确保分类数据已经做了渲染
+                const id = localStorage.getItem('id')
+                console.log(id);
+                if (id) {
+                    // 编辑
+                    $.ajax({
+                        url: '/my/article/info?id=' + id,
+                        success(res) {
+                            $('#image').attr('src', 'http://www.liulongbin.top:3008' + res.data.cover_img)
+
+                            loadImage()
+
+                            // 这里是编辑的时候，给文字表单进行赋值操作
+                            form.val('form-pub', res.data)
+                        }
+                    });
+                    // ------------------------
+                } else {
+                    // 添加
+                    loadImage()
+                }
             }
         })
     }
+    var $image = null
+    var options = null
 
-    // 2.图片封面裁剪(文章封面)----------------
-    // 2.1 初始化图片裁剪器
-    var $image = $('#image')
 
-    // 2.2 裁剪选项
-    var options = {
-        aspectRatio: 400 / 280,
-        preview: '.img-preview'
+    function loadImage() {
+        // 2.图片封面裁剪(文章封面)----------------
+        // 2.1 初始化图片裁剪器
+        $image = $('#image')
+
+        // 2.2 裁剪选项
+        options = {
+            aspectRatio: 400 / 280,
+            preview: '.img-preview'
+        }
+
+        // 2.3 初始化裁剪区域
+        $image.cropper(options);
+        // 图片封面裁剪(文章封面)----------------
     }
 
-    // 2.3 初始化裁剪区域
-    $image.cropper(options);
-    // 图片封面裁剪(文章封面)----------------
 
 
     // 3.为选择封面的按钮，绑定点击事件处理函数
     $('#btnChooseImage').on('click', function() {
-        $('#coverFile').click()
+        $('#coverFile').click();
+        // 如何判断用户已经选择了文件？
+        // files
     })
 
     // 4.监听 coverFile 的 change 事件 ，获取用户选择的文件列表
@@ -108,41 +147,46 @@ $(function() {
                 // 6.5将文件对象，存储到 fd 中
                 fd.append('cover_img', blob)
 
+                // ------------------------------
+                const id = localStorage.getItem('id')
+                if (id) {
+                    // 我需要走 确认编辑的接口（id: xxxx）
+                    fd.append('id', id)
+                    editArticle(fd)
+                } else {
+                    // 7.1发起 ajax 数据请求 (调用publishArticle())
+                    publishArticle(fd)
+                }
+                // ------------------------------
+
                 // 7.1发起 ajax 数据请求 (调用publishArticle())
-                publishArticle(fd) // publishArticle 发布文章的意思
+                // publishArticle(fd) // publishArticle 发布文章的意思
             })
     })
 
 
-    // 8.修改文章的方法(瑕疵)
-    // if (flag) {
-    //     form.val('form-edit', data)
+    // 8.修改文章的方法
+    function editArticle(fd) {
+        $.ajax({
+            method: 'PUT',
+            url: '/my/article/info',
+            data: fd,
+            contentType: false,
+            processData: false,
+            success(res) {
+                if (res.code === 0) {
+                    layer.msg('编辑文章成功');
+                    // 一定要删除本地存储的id值
+                    localStorage.removeItem('id');
+                    // 编辑文章成功后，跳转到文章列表页面
+                    location.href = '/article/art_list.html'
+                }
+            }
 
-    //     function publishArticle(fd) {
-    //         $.ajax({
-    //             method: 'PUT',
-    //             url: '/my/article/info',
-    //             data: fd,
-    //             contentType: false,
-    //             processData: false,
-    //             success(res) {
-    //                 if (res.code !== 0) {
-    //                     return layer.msg('修改文章失败！')
-    //                 }
-    //                 layer.msg('修改文章成功！')
+        })
+    }
 
-
-    //                 // 发布文章成功后，跳转文章列表页面
-    //                 localStorage.removeItem('content')
-    //                 localStorage.removeItem('flag')
-    //                 location.href = '../article/art_list.html'
-
-    //             }
-    //         })
-    //     }
-    // }
     // 7.发布文章的方法(函数)
-
     function publishArticle(fd) {
         $.ajax({
             method: 'POST',

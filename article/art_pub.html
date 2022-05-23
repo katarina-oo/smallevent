@@ -22,7 +22,10 @@
         <div class="layui-card-body">
 
             <!-- 发布文章的表单 -->
-            <form class="layui-form" id="form-pub" lay-filter="form-edit">
+            <!-- 快速根据基于表单收集数据到 new FormData($('#form-pub') -->
+            <!-- let fd = new FormData() -->
+            <!-- fd.append('键名', 'value') -->
+            <form class="layui-form" id="form-pub" lay-filter="form-pub">
 
                 <!-- 第一行文章标题 -->
                 <div class="layui-form-item">
@@ -49,7 +52,7 @@
                 </div>
                 <!-- 第二行文章类型 -->
 
-                <!-- 第三行副文本编辑器(文本内容) -->
+                <!-- 第三行富文本编辑器(文本内容) -->
                 <div class="layui-form-item">
                     <!-- 左侧的 label -->
                     <label class="layui-form-label">文章内容</label>
@@ -59,7 +62,7 @@
                         <textarea name="content"></textarea>
                     </div>
                 </div>
-                <!-- 第三行副文本编辑器(文本内容) -->
+                <!-- 第三行富文本编辑器(文本内容) -->
 
                 <!-- 第四行图片封面裁剪(文章封面) -->
                 <div class="layui-form-item">

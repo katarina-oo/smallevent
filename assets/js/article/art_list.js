@@ -175,27 +175,16 @@ $(function() {
                 }
             })
             layer.close(index);
-        });
+        })
     })
 
-
-    // --------------------------------------------
+    // 7.通过代理，为编辑按钮添加点击事件
     $('tbody').on('click', '.btn-edit', function() {
-        console.log(1);
-        let id = $(this).attr('data-id')
-        console.log(id);
-        $.ajax({
-                method: 'GET',
-                url: '/my/article/info',
-                data: { id },
-                success: function(res) {
-                    console.log(res);
-                    localStorage.setItem('content', JSON.stringify(res.data))
-                    localStorage.setItem('flag', 'true')
-                    location.href = '/article/art_pub.html'
-                }
-            })
-            // window.next.editArticle()
-
+        // 可以进缓存
+        const id = $(this).attr('data-id');
+        // 先把你刚刚编辑的文章的 id 记录到缓存里面
+        localStorage.setItem('id', id);
+        // 跳转到发布文章的页面
+        location.href = '/article/art_pub.html'
     })
 })

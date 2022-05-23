@@ -14,6 +14,7 @@
     <!-- 卡片区域 -->
     <div class="layui-card">
         <div class="layui-card-header">文章列表</div>
+
         <div class="layui-card-body">
 
             <!-- 筛选区域 -->
@@ -29,18 +30,15 @@
                 <div class="layui-form-item layui-inline">
                     <select name="state">
                         <option value="">请选择状态</option>
-                        <option value="">草稿</option>
-                        <option value="">已发布</option>
+                        <option value="已发布">已发布</option>
+                        <option value="草稿">草稿</option>
                       </select>
                 </div>
 
                 <div class="layui-form-item layui-inline">
-                    <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit lay-filter="formDemo">筛选</button>
-                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                        </div>
-                    </div>
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">筛选</button>
+                    <!-- 重置可加可不加 -->
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </form>
             <!-- 筛选区域 -->
@@ -65,25 +63,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <!-- <tr>
                         <td>贤心</td>
                         <td>2016-11-29</td>
                         <td>人生就像是一场修行</td>
                         <td>人生就像是一场修行</td>
                         <td>人生就像是一场修行</td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
             <!-- 列表区域 -->
-
-            <!-- 分类可选项的模板结构 -->
-            <script type="text/html" id="tpl-cate">
-                <option value="">请选择分类</option>
-                {{each data}}
-                <option value="{{$value.id}}">{{$value.cate_name}}</option>
-                {{/each}}
-            </script>
-            <!-- 分类可选项的模板结构 -->
 
 
             <!-- 分页区域 -->
@@ -92,6 +81,15 @@
 
         </div>
     </div>
+
+    <!-- 分类可选项的模板结构 -->
+    <script type="text/html" id="tpl-cate">
+        <option value="">请选择分类</option>
+        {{each data}}
+        <option value="{{$value.id}}">{{$value.cate_name}}</option>
+        {{/each}}
+    </script>
+    <!-- 分类可选项的模板结构 -->
 
 
     <!-- 列表数据的模板引擎 -->
