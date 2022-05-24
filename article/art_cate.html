@@ -71,23 +71,19 @@
     <!-- 添加分类的弹出层 -->
     <!-- 用content属性 来指定 html标签的内容 -->
     <script type="text/html" id="dialog-add">
-
         <form class="layui-form" id="form-add">
-
             <div class="layui-form-item">
                 <label class="layui-form-label">分类名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cate_name" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    <input type="text" name="cate_name" required lay-verify="required" placeholder="请输入分类名称" autocomplete="off" class="layui-input">
                 </div>
             </div>
-
             <div class="layui-form-item">
                 <label class="layui-form-label">分类别名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="cate_alias" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    <input type="text" name="cate_alias" required lay-verify="required" placeholder="请输入分类别名" autocomplete="off" class="layui-input">
                 </div>
             </div>
-
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit lay-filter="formDemo">确认添加</button>
@@ -95,20 +91,19 @@
                 </div>
             </div>
         </form>
-
     </script>
     <!-- 添加分类的弹出层 -->
 
     <!-- 修改分类的弹出层 -->
-    <script type="text/html" id="dialog-edit">
-        <!-- 快速为表单填充数据 添加lay-filter属性 -->
-        <form class="layui-form" id="form-edit" lay-filter="form-edit">
+    <!-- <script type="text/html" id="dialog-edit"> -->
+    <!-- 快速为表单填充数据 添加lay-filter属性 -->
+    <!-- <form class="layui-form" id="form-edit" lay-filter="form-edit"> -->
 
-            <!-- 隐藏域，保存 id 的值 -->
-            <input type="hidden" name="id">
-            <!-- 隐藏域，保存 id 的值 -->
+    <!-- 隐藏域，保存 id 的值 -->
+    <!-- <input type="hidden" name="id"> -->
+    <!-- 隐藏域，保存 id 的值 -->
 
-            <div class="layui-form-item">
+    <!-- <div class="layui-form-item">
                 <label class="layui-form-label">分类名称</label>
                 <div class="layui-input-block">
                     <input type="text" name="cate_name" required lay-verify="required" placeholder="请输入分类名称" autocomplete="off" class="layui-input">
@@ -129,8 +124,35 @@
             </div>
 
         </form>
-    </script>
+    </script> -->
     <!-- 修改分类的弹出层 -->
+
+    <!-- 合并添加和修改分类的弹出层(工作中很常用) -->
+    <!-- 添加/修改分类的弹出层 -->
+    <script type="text/html" id="dialog-cate">
+        <form class="layui-form" id="form-cate" lay-filter="form-cate">
+            <!-- 隐藏域，保存 Id 的值 -->
+            <input type="hidden" name="id">
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="cate_name" required lay-verify="required" placeholder="请输入分类名称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类别名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="cate_alias" required lay-verify="required" placeholder="请输入分类别名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">确认修改</button>
+                </div>
+            </div>
+        </form>
+    </script>
+
 
 
 
